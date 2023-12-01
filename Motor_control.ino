@@ -18,14 +18,6 @@ void loop() {
   for (uint8_t i = 0; i < 16; i++) {
     NUM_ON += (value >> (15 - i)) & 0x01;
   }
-  // 오류 수정 완료
-  if (NUM_ON > 10) {
-    for(int i=15; i>=0; i--) {
-      Serial.print((value >> i) & 0x1);
-    }
-    Serial.println();
-    delay(10000);
-  }
 } 
   //   컨트롤러  2개 필요함 (모터 제어 핀 16개, 한 컨트롤러당 8개씩 제어)
   //  포인터 써서 16비트를 8비트 8비트로 각 컨트롤러에 
