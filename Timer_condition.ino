@@ -5,7 +5,7 @@ void loop() {
   static time_previous = 0;
   uint16_t counter = millis();
   
-  if(counter >= 100){
+  if(counter - time_previous >= 100){
     deci_sec++;
     if(deci_sec == 600){
       deci_sec = 0;
@@ -14,7 +14,7 @@ void loop() {
         min = 0;
       }
     }
-    time_previous = time_current;
+    time_previous = counter;
   }
   LCD_ON(min*1000 + deci_sec);
 }
