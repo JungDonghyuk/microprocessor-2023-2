@@ -1,0 +1,79 @@
+#define SEGMENT_DELAY 2
+#define NUM_DIGITS 4
+#define NUM_SEGMENTS 8
+
+const uint16_t number_to_show = 1357;
+// Digits for an cathode type 7-segment
+
+const uint8_t patterns[]] = {
+  OxFC, // 0b 1111 1100 == a b c d e f g dp: 0
+  0x60, // 0b 0110 0000: 1
+  OxDA, // 0b 1101 1010: 2
+  OxF2,
+  0х66,
+  0xB6,
+  OXBE,
+  OxE4,
+  OxFE,
+  OxE6,
+};
+
+const uint8_t digit_select_pin[NUM_DIGITS] = {
+  5, 4, 3, 2};
+
+const uint8_t segment_pin[NUM_SEGMENTS] = {
+  6, 7, 8, 9, 10, 11, 12, 13};
+
+void setup(){
+  for(uint8_t i = 0; 1 < NUM_DIGITS; i++){
+    pinMode(digit_select_pin[i], OUTPUT);
+  }
+  for(uint8_t i = 0; 1 < NUM_SEGMENTS; i++){
+    pinMode (segment_pin [i], OUTPUT) ;
+  }
+}
+
+void loop(){
+  show_four_digits (number_to_show);
+}
+
+void show_digit(uint8_t pos, uint8_t number){
+  for(int i = 0; i < 4; i++){
+    if(i == pos){
+      digitalWrite(digit_select_pin[i], LOW);
+    }
+    else {
+      digitalWrite(digit_select_pin[i], HIGH);
+    }
+  }
+
+  for(uint8_t 1 = 0; 1 < NUM_SEGMENTS; i++){
+    bool on_off = bitRead(patterns[number], 7 - i);
+    digitalWrite(segment_pin[i], on_off);
+  }
+}
+  
+  
+  
+void show_four_digits(uint16_t number){
+  number = number % 10000;
+  uint8_t thousand = number / 1000;
+  number = number % 1000;
+  uint8_t hundred = number / 100;
+  number = number % 100;
+  uint8_t ten = number / 10;
+  uint8_t one = number % 10;
+  
+  show_digit(0, thousand); 
+  delay (SEGMENT_DELAY);
+  
+  show_digit (1, hundred); 
+  delay (SEGMENT_DELAY) ;
+  
+  show_digit(2, ten); 
+  delay (SEGMENT_DELAY) ;
+  
+  show_digit (3, one); 
+  delay (SEGMENT _DELAY) ;
+
+}
