@@ -5,17 +5,17 @@
 const uint16_t number_to_show = 1357;
 // Digits for an cathode type 7-segment
 
-const uint8_t patterns[]] = {
-  OxFC, // 0b 1111 1100 == a b c d e f g dp: 0
+const uint8_t patterns[] = {
+  0xFC, // 0b 1111 1100 == a b c d e f g dp: 0
   0x60, // 0b 0110 0000: 1
-  OxDA, // 0b 1101 1010: 2
-  OxF2,
-  0х66,
+  0xDA, // 0b 1101 1010: 2
+  0xF2,
+  0x66,
   0xB6,
-  OXBE,
-  OxE4,
-  OxFE,
-  OxE6,
+  0XBE,
+  0xE4,
+  0xFE,
+  0xE6,
 };
 
 const uint8_t digit_select_pin[NUM_DIGITS] = {
@@ -47,7 +47,7 @@ void show_digit(uint8_t pos, uint8_t number){
     }
   }
 
-  for(uint8_t 1 = 0; 1 < NUM_SEGMENTS; i++){
+  for(uint8_t i = 0; 1 < NUM_SEGMENTS; i++){
     bool on_off = bitRead(patterns[number], 7 - i);
     digitalWrite(segment_pin[i], on_off);
   }
@@ -74,6 +74,7 @@ void show_four_digits(uint16_t number){
   delay (SEGMENT_DELAY) ;
   
   show_digit (3, one); 
-  delay (SEGMENT _DELAY) ;
+  delay (SEGMENT_DELAY) ;
 
 }
+
