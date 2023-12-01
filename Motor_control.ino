@@ -16,6 +16,7 @@ void loop() {
     NUM_ON += (value >> (7 - i)) & 0x01;
   }
   //수정 필요! 시리얼 모니터에서 아웃풋 항상 16자리가 아님.......
+  //요것만 바꾸면 완성일듯..?
   if (NUM_ON > 10) {
     Serial.println(value);//실제 코드의 경우   PORB |= value
   }
