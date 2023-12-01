@@ -1,5 +1,5 @@
 void loop() {
-
+//  [분, 10*초, 초, 10^-1초]
   static uint8_t deci_sec = 0;
   static uint8_t min = 0;
   static time_previous = 0;
@@ -16,11 +16,12 @@ void loop() {
     }
     time_previous = counter;
   }
-  LCD_ON(min*1000 + deci_sec);
+  SEG_ON(min*1000 + deci_sec); //4 7 segment로 출력
 }
+//타이머 제한 5분으로 할 예정, 그 전에 완료했을 때 어떻게 타이머 중지시킬지 생각해보기....
 
-
-// 병합시킬 코드에서 min 정의
+// 5분이 되면 
 if (min = 5) {
-  println()
+  ()
 }
+// 
