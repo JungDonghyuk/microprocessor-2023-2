@@ -11,8 +11,10 @@ void setup() {
   pinMode(MOSI, INPUT);
   pinMode(SCK, INPUT);
   pinMode(SS, INPUT);
-}
 
+  SPCR |= (1<<SPIE)| (1<<SPE) | (0 << SPR1) | (1<<SPR0);
+  SPCR &= ~(1<<MSTR);
+}
 ISR (SPI_STC_vect) {
   DDRB |= 0xFF;
   RECEIVED = SPDR; 
@@ -21,5 +23,3 @@ ISR (SPI_STC_vect) {
 }
 
 void loop(){
-  
-}
