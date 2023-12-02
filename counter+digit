@@ -15,8 +15,8 @@ const uint8_t patterns[] = {
   0xE6,
 };
 
-uint8_t digit_select_pin[NUM_DIGITS] = {5, 4, 3, 2};
-uint8_t segment_pin[NUM_SEGMENTS] = {6, 7, 8, 9, 10, 11, 12, 13};
+uint8_t digit_select_pin[NUM_DIGITS] = {1,2,3,4};
+uint8_t segment_pin[NUM_SEGMENTS] = {5, 6, 7, 8, 9, 10, 11, 12};
 
 void setup(){
   for(uint8_t i = 0; i < NUM_DIGITS; i++){
