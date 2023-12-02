@@ -17,9 +17,11 @@ void setup() {
 }
 ISR (SPI_STC_vect) {
   DDRB |= 0xFF;
-  RECEIVED = SPDR; 
+  RECEIVED = (SPDR<<8) ; 
   PORTB |= RECEIVED; 
   Serial.println(RECEIVED);
 }
 
 void loop(){
+
+}
