@@ -31,7 +31,7 @@ void loop() {
     
     digitalWrite(SS_1 LOW); 
     SPI.transfer(lByte); 
-    digitalWrite(SS_2, HIGH); 
+    digitalWrite(SS_1, HIGH); 
 
     
     digitalWrite(SS_2, LOW); 
