@@ -20,8 +20,9 @@ ISR (SPI_STC_vect) {
   RECEIVED = (SPDR) ; 
   PORTD = RECEIVED; 
   for(int i=7; i>=0; i--) {
-  Serial.print((RECEIVED >> i) & 0x1);
-}
+    Serial.print((RECEIVED >> i) & 0x1); 
+  }
+Serial.println();
 }
 void loop(){
 
