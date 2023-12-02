@@ -7,6 +7,10 @@ void setup() {
   while (!Serial) {
     ; 
   }
+  
+  SPI.begin(); 
+  pinMode(SS_1, OUTPUT);
+  pinMode(SS_2, OUTPUT); 
 }
 
 void loop() {
@@ -21,16 +25,19 @@ void loop() {
   }
 
   if (NUM_ON > 10) {
-   uint8_t lByte = (value >> 8);
-   uint8_t hByte = (value & 0xff);
+    uint8_t lByte = (value >> 8);
+    uint8_t hByte = (value & 0xff);
 
-   // SLAVE로 lByte 송신
-   uint8_t transfer_SPI(lByte){
-   digitalWrite(SS, LOW);
-   SPDR = data;
-   while(!(SPSR& (1 << SPIF)));
-   digitalWrite(SS, HIGH);
-   return SPDR
-   delay(1000);
-}
+    
+    digitalWrite(SS_1 LOW); 
+    SPI.transfer(lByte); 
+    digitalWrite(SS_2, HIGH); 
+
+    
+    digitalWrite(SS_2, LOW); 
+    SPI.transfer(hByte); 
+    digitalWrite(SS_2, HIGH); 
+
+    delay(1000);
+  }
 }
