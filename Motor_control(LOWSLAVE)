@@ -16,10 +16,10 @@ void setup() {
   SPCR &= ~(1<<MSTR);
 }
 ISR (SPI_STC_vect) {
-  DDRB |= 0xFF;
-  RECEIVED = (SPDR<<8) ; 
-  PORTB |= RECEIVED; 
-  Serial.println(RECEIVED);
+  DDRD = 0xFF;
+  RECEIVED = (SPDR) ; 
+  PORTD = RECEIVED; 
+  Serial.println(RECEIVED,BIN);
 }
 
 void loop(){
