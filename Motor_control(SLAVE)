@@ -1,16 +1,25 @@
 #include <SPI.h>
 
-volatile uint8_t RECEICVED;// 최적화 막기 위해 uint대신 volatile사용
+volatile uint8_t RECEIVED;// 최적화 막기 위해 uint대신 volatile사용
 
 void setup() {
   SPI.begin();
-  SPI.attachinterrupt();
+  Serial.begin(9600);
+  SPI.attachInterrupt();
   DDRB |= 0xFF;
+  pinMode(MISO, OUTPUT);
+  pinMode(MOSI, INPUT);
+  pinMode(SCK, INPUT);
+  pinMode(SS, INPUT);
 }
 
 ISR (SPI_STC_vect) {
   DDRB |= 0xFF;
-  RECEICVED = SPDR; 
-  PORTB |= RECEICVED; 
+  RECEIVED = SPDR; 
+  PORTB |= RECEIVED; 
   Serial.println(RECEIVED);
+}
+
+void loop(){
+  
 }
