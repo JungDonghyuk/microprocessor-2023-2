@@ -1,17 +1,16 @@
 #include <SPI.h>
-
 #define NUM_MOTORS 16
-
+#define SS_1 9
+#define SS_2 10
 void setup() {
   Serial.begin(9600);
   while (!Serial) {
     ; 
   }
-  
   SPI.begin(); 
   pinMode(MOSI, OUTPUT); 
   pinMode(SCK, OUTPUT);
-  pinMode(SS, OUTPUT);
+  pinMode(9, OUTPUT);
   SPCR |= (1 << SPE) | (1 << MSTR) | (0 << SPR1) | ( 1<< SPR0);
 }
 
@@ -31,9 +30,15 @@ void loop() {
     uint8_t hByte = (value & 0xff);
     Serial.println(lByte);
 
-    digitalWrite(SS, LOW); 
+    //slave1 켜고
+    digitalWrite(SS_1, LOW); 
     SPI.transfer(lByte); 
-    digitalWrite(SS, HIGH); 
+    digitalWrite(SS_1, HIGH);
+    //바로 slave2
+    digitalWrite(SS_2, LOW); 
+    SPI.transfer(hByte); 
+    digitalWrite(SS_2, HIGH); 
+
 
     delay(1000);
   }
