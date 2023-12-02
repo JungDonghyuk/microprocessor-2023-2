@@ -87,13 +87,13 @@ void show_digit(uint8_t pos, uint8_t number){
 }
 
 void show_four_digits(uint16_t number){
-  number = number % 10000;
-  uint8_t thousand = number / 1000;
   number = number % 1000;
-  uint8_t hundred = number / 100;
+  uint8_t thousand = number / 100;
   number = number % 100;
-  uint8_t ten = number / 10;
-  uint8_t one = number % 10;
+  uint8_t hundred = number / 10;
+  number = number % 10;
+  uint8_t ten = number ;
+  uint8_t one = number ;
   
   show_digit(0, thousand); 
   delay (SEGMENT_DELAY);
