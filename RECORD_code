@@ -1,0 +1,15 @@
+#include <EEPROM.h>
+//TIMER 멈춘 값 NEW_RECORD로 지정해주고,
+void setup() {
+  uint16_t 
+  OLD_RECORD = EEPROM.write(address);
+  if(OLD_RECORD > NEW_RECORD) {
+    EEPROM.write(address, newValue);
+    LCD("NEW SCORE")// 신기록 출력
+
+  else if {
+    LCD("FAIL") // 앞에서 미리 정의한 lcd 함수 사용
+  }
+  }
+}
+
