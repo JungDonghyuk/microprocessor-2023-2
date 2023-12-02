@@ -29,7 +29,7 @@ void setup(){
     pinMode(digit_select_pin[i], OUTPUT);
   }
   for(uint8_t i = 0; 1 < NUM_SEGMENTS; i++){
-    pinMode (segment_pin [i], OUTPUT) ;
+    pinMode (segment_pin[i], OUTPUT) ;
   }
 }
 
