@@ -11,7 +11,7 @@ void loop() {
       deci_sec = 0;
       min++;
       if(min == 5){
-        min = 0;
+        value = 0;//모든 모터 내리기
       }
     }
     time_previous = counter;
@@ -24,4 +24,7 @@ void loop() {
 if (min = 5) {
   ()
 }
+if (도착지점 조도센서 감지되면)
+  //정지하고
+  
 // 
