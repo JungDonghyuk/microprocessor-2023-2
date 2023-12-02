@@ -70,7 +70,7 @@ void EEPROM_write(uint16_t uiAddress, uint8_t ucData) {
   EECR |= (1<<EEPE);
 }
 
-void show_digit(uint8_t pos, uint8_t number){
+void show_digit(uint8_t pos, current_time){
   for(int i = 0; i < 4; i++){
     if(i == pos){
       digitalWrite(digit_select_pin[i], LOW);
@@ -81,19 +81,19 @@ void show_digit(uint8_t pos, uint8_t number){
   }
 
   for(uint8_t i = 0; i < NUM_SEGMENTS; i++){
-    bool on_off = bitRead(patterns[number], 7 - i);
+    bool on_off = bitRead(patterns[current_time], 7 - i);
     digitalWrite(segment_pin[i], on_off);
   }
 }
 
-void show_four_digits(uint16_t number){
-  number = number % 1000;
-  uint8_t thousand = number / 100;
-  number = number % 100;
-  uint8_t hundred = number / 10;
-  number = number % 10;
-  uint8_t ten = number ;
-  uint8_t one = number ;
+void show_four_digits(current_time){
+  current_time = current_time % 10000;
+  uint8_t thousand = current_time / 1000;
+  current_time = current_time % 1000;
+  uint8_t hundred = current_time / 100;
+  current_time = current_time % 100;
+  uint8_t ten = current_time /10 ;
+  uint8_t one = current_time %10 ;
   
   show_digit(0, thousand); 
   delay (SEGMENT_DELAY);
