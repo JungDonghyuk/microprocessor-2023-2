@@ -9,8 +9,8 @@ void setup() {
   }
   
   SPI.begin(); 
-  pinMode(SS_1, OUTPUT);
-  pinMode(SS_2, OUTPUT); 
+  pinMode(SS_1, OUTPUT); //1번 아두이노 송신 핀 설정
+  pinMode(SS_2, OUTPUT); //2번 아두이노 송신 핀 설정
 }
 
 void loop() {
