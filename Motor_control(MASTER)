@@ -9,8 +9,10 @@ void setup() {
   }
   
   SPI.begin(); 
-  pinMode(SS_1, OUTPUT); //1번 아두이노 송신 핀 설정
-  pinMode(SS_2, OUTPUT); //2번 아두이노 송신 핀 설정
+  pinMode(MOSI, OUTPUT); 
+  pinMode(SCK, OUTPUT);
+  pinMode(SS, OUTPUT);
+  SPCR |= (1 << SPE) | (1 << MSTR) | (0 << SPR1) | ( 1<< SPR0);
 }
 
 void loop() {
@@ -27,16 +29,11 @@ void loop() {
   if (NUM_ON > 10) {
     uint8_t lByte = (value >> 8);
     uint8_t hByte = (value & 0xff);
+    Serial.println(lByte);
 
-    
-    digitalWrite(SS_1 LOW); 
+    digitalWrite(SS, LOW); 
     SPI.transfer(lByte); 
-    digitalWrite(SS_1, HIGH); 
-
-    
-    digitalWrite(SS_2, LOW); 
-    SPI.transfer(hByte); 
-    digitalWrite(SS_2, HIGH); 
+    digitalWrite(SS, HIGH); 
 
     delay(1000);
   }
