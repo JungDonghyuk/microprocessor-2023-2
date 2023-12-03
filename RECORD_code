@@ -13,36 +13,34 @@ void setup() {
   lcd.begin(16, 2);  
   
   EEPROM.get(address, OLD_RECORD);
-  if(NEW_RECORD= 0500){
+
+  if(sec >= 5) {
     if(OLD_RECORD != 0) {
       if(OLD_RECORD > NEW_RECORD) {
         EEPROM.put(address, NEW_RECORD);
         lcd.setCursor(6,0);  
         lcd.print("NEW SCORE");
         lcd.setCursor(6,1);  
-        lcd.print(NEW_RECORD);  
-      }
+        lcd.print(NEW_RECORD);
+        delay(3000);  
+        }
       else if(OLD_RECORD == NEW_RECORD) {
         EEPROM.put(address, NEW_RECORD);
-      }
-      else if {
+        }
+      else if(OLD_RECORD <= NEW_RECORD) {
       lcd.setCursor(6,0);  
       lcd.print("FAIL");
-    }
+      }
   } 
-  else if(OLD_RECORD == 0) {
-    EEPROM.put(address, NEW_RECORD);
-    lcd.setCursor(6,0);  
-    lcd.print("NEW SCORE");
-    lcd.setCursor(6,1);  
-    lcd.print(NEW_RECORD);  
+    else if(OLD_RECORD == 0) {
+      EEPROM.put(address, NEW_RECORD);
+      lcd.setCursor(6,0);  
+      lcd.print("NEW SCORE");
+      lcd.setCursor(6,1);  
+      lcd.print(NEW_RECORD);  
 
   }
   }
-  else if(NEW_RECORD <= 0500){
-    lcd.print("FAIL")
+  else if(sec <= 5){
   }
-}
-
-void loop() {
 }
