@@ -37,7 +37,7 @@ void setup(){
 }
 void loop(){
   pinMode (13, INPUT);
-  pinMode (12, INPUT);
+
   static uint16_t deci_sec = 0;
   static uint8_t sec = 0;
   static uint8_t min = 0;
@@ -63,13 +63,11 @@ void loop(){
       time_previous = time_current;
     }
     else if(buttonstate == 0) {
-        deci_sec = 0;
-        sec = 0;
-        min = 0;
+        
         lcd.begin(16, 2); 
         lcd.init();
         lcd.backlight(); 
-    }
+    
   
         EEPROM.get(address, OLD_RECORD);
         if(NEW_RECORD > 50) {
@@ -85,7 +83,7 @@ void loop(){
             else if(OLD_RECORD == NEW_RECORD) {
               EEPROM.put(address, NEW_RECORD);
             }
-            else if(OLD_RECORD <= NEW_RECORD) {
+            else if(OLD_RECORD < NEW_RECORD) {
               lcd.setCursor(6,0);  
               lcd.print("FAIL");
             }
@@ -100,13 +98,14 @@ void loop(){
             }
           }
             
-        }
+        
       
       
       return; // 게임이 종료되는 시점, 여기서 무조건 끝남
-
+    }
       
-      show_four_digits(min * 1000 + sec * 10 + deci_sec);
+  show_four_digits(min * 1000 + sec * 10 + deci_sec);
+  }
     }
 void show_digit(uint8_t pos, uint8_t number){
   for(int i = 0; i < 4; i++){
