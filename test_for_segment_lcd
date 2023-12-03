@@ -61,7 +61,7 @@ void loop(){
       }
       time_previous = time_current;
     }
-      else if(digitalRead(13) == 1) {
+      else if(digitalRead(13) == 0) {
         writeCount++;
         if(writeCount <= 10) {
           lcd.begin(16, 2); 
