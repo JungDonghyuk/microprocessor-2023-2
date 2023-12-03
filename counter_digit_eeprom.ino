@@ -24,6 +24,19 @@ const uint8_t patterns[] = {
   0xE6,
 };
 
+const uint8_t patternswithdp[] = {
+  0xFD, // 0b 1111 1101: 0 (with dp)
+  0x61, // 0b 0110 0001: 1 (with dp)
+  0xDB, // 0b 1101 1011: 2 (with dp)
+  0xF3,
+  0x67,
+  0xB7,
+  0xBF,
+  0xE5,
+  0xFF,
+  0xE7,
+};
+
 uint8_t digit_select_pin[NUM_DIGITS] = {1,2,3,4};
 uint8_t segment_pin[NUM_SEGMENTS] = {5, 6, 7, 8, 9, 10, 11, 12};
 
@@ -136,7 +149,7 @@ void loop(){
           writeCount = 0; 
         }
   }
-     
+    clear_timer(); 
   }
 
 void show_digit(uint8_t pos, uint8_t number){
@@ -155,6 +168,22 @@ void show_digit(uint8_t pos, uint8_t number){
   }
   delay(SEGMENT_DELAY);
 }
+void show_digitwithdp(uint8_t pos, uint8_t number){
+  for(int i = 0; i < 4; i++){
+    if(i == pos){
+      digitalWrite(digit_select_pin[i], LOW);
+    }
+    else {
+      digitalWrite(digit_select_pin[i], HIGH);
+    }
+  }
+
+  for(uint8_t i = 0; i < NUM_SEGMENTS; i++){
+    bool on_off = bitRead(patternswithdp[number], 7 - i);
+    digitalWrite(segment_pin[i], on_off);
+  }
+  delay(SEGMENT_DELAY);
+}
 
 void show_four_digits(uint16_t number){
   uint8_t thousand = number / 1000;
@@ -164,14 +193,13 @@ void show_four_digits(uint16_t number){
   uint8_t ten = number / 10;
   uint8_t one = number % 10;
 
-  show_digit(0, thousand);
+  show_digitwithdp(0, thousand);
   show_digit(1, hundred);
   show_digit(2, ten);
   show_digit(3, one);
 }
 
-//
-void clear_all_digits() {
+void clear_timer() {
   for (uint8_t i = 0; i < NUM_DIGITS; i++) {
     digitalWrite(digit_select_pin[i], HIGH);
   }
