@@ -26,7 +26,6 @@ uint16_t read_ADC(uint8_t channel) {
   return ADC;
 }
 
-int potentiometer2 =0;
 LiquidCrystal_I2C lcd(0x27,16,2);
 
 const uint8_t patterns[] = {
