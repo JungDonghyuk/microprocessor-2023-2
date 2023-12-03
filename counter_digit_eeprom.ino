@@ -114,25 +114,27 @@ void loop(){
               sec = 0;
               deci_sec =0;
             }
-          else(){
+          }
+          else{
             lcd.setCursor(6,0);  
             lcd.print("ERROR");
             min =0;
             sec = 0;
             deci_sec =0;
           }
-            }
+            
+          
         }
             
-        }
+        
         else {
           EEPROM.put(address, 0);
           writeCount = 0; 
         }
-      
+  }
       return; // 게임이 종료되는 시점, 여기서 무조건 끝남
   }
-}
+
 void show_digit(uint8_t pos, uint8_t number){
   for(int i = 0; i < 4; i++){
     if(i == pos){
