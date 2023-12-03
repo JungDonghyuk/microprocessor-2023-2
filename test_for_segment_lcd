@@ -63,9 +63,6 @@ void loop(){
       time_previous = time_current;
     }
     else if(buttonState == LOW) {
-        deci_sec = 0;
-        sec = 0;
-        min = 0;
         writeCount++;
         if(writeCount <= 10) {
           lcd.begin(16, 2); 
