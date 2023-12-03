@@ -43,12 +43,13 @@ void loop(){
   static uint8_t min = 0;
   static uint16_t time_previous = 0;
   static uint8_t writeCount = 0;
+  int buttonstate = digitalRead(13);
 
   uint16_t time_current = millis();
   uint16_t NEW_RECORD = min*1000 + sec*10 + deci_sec;
   uint16_t OLD_RECORD;
   uint8_t address = 0;
-  if(digitalRead(13) == 1){
+  if(buttonState == HIGH){
     if(time_current - time_previous >= 100){
       deci_sec++;
       if(deci_sec == 10){
@@ -61,7 +62,10 @@ void loop(){
       }
       time_previous = time_current;
     }
-      else if(digitalRead(13) == 0) {
+    else if(buttonState == LOW) {
+        deci_sec = 0;
+        sec = 0;
+        min = 0;
         writeCount++;
         if(writeCount <= 10) {
           lcd.begin(16, 2); 
@@ -69,7 +73,7 @@ void loop(){
           lcd.backlight(); 
   
          EEPROM.get(address, OLD_RECORD);
-          if(sec > 5) {
+          if(NEW_RECORD > 50) {
             if(OLD_RECORD != 0) {
               if(OLD_RECORD > NEW_RECORD) {
                 EEPROM.put(address, NEW_RECORD);
@@ -96,16 +100,15 @@ void loop(){
 
             }
           }
-          else if(sec <= 5){
-          }
             
         }
         else {
           EEPROM.put(address, 0);
           writeCount = 0; 
         }
-  
+      
       return; // 게임이 종료되는 시점, 여기서 무조건 끝남
+
       }
     show_four_digits(min * 1000 + sec * 10 + deci_sec);
     }
