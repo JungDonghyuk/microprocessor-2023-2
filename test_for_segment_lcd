@@ -37,7 +37,7 @@ void setup(){
 }
 void loop(){
   pinMode (13, INPUT);
-  pinMode (12, INPUT);
+  
   static uint16_t deci_sec = 0;
   static uint8_t sec = 0;
   static uint8_t min = 0;
@@ -62,7 +62,12 @@ void loop(){
       }
       time_previous = time_current;
     }
-    else if(buttonState == LOW) {
+    
+    
+    show_four_digits(min * 1000 + sec * 10 + deci_sec);
+    }
+  
+  else if(buttonState == LOW) {
         writeCount++;
         if(writeCount <= 10) {
           lcd.begin(16, 2); 
@@ -105,11 +110,8 @@ void loop(){
         }
       
       return; // 게임이 종료되는 시점, 여기서 무조건 끝남
-
-      }
-    show_four_digits(min * 1000 + sec * 10 + deci_sec);
-    }
   }
+}
 void show_digit(uint8_t pos, uint8_t number){
   for(int i = 0; i < 4; i++){
     if(i == pos){
