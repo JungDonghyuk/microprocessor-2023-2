@@ -86,7 +86,9 @@ void loop(){
       else if(potentiometer2 > 500) {
         writeCount++;
         if(writeCount <= 10) {
-          lcd.begin(16, 2);  
+          lcd.begin(16, 2); 
+          lcd.init();
+          lcd.backlight(); 
   
          EEPROM.get(address, OLD_RECORD);
           if(sec > 5) {
@@ -97,7 +99,7 @@ void loop(){
                 lcd.print("NEW SCORE");
                 lcd.setCursor(6,1);  
                 lcd.print(NEW_RECORD);
-                delay(3000);  
+      
               }
               else if(OLD_RECORD == NEW_RECORD) {
                 EEPROM.put(address, NEW_RECORD);
