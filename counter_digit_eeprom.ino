@@ -169,3 +169,13 @@ void show_four_digits(uint16_t number){
   show_digit(2, ten);
   show_digit(3, one);
 }
+
+//
+void clear_all_digits() {
+  for (uint8_t i = 0; i < NUM_DIGITS; i++) {
+    digitalWrite(digit_select_pin[i], HIGH);
+  }
+  for (uint8_t i = 0; i < NUM_SEGMENTS; i++) {
+    digitalWrite(segment_pin[i], LOW);
+  }
+}
