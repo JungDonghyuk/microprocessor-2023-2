@@ -11,6 +11,8 @@ uint8_t address = 0;
 
 void setup() {
   lcd.begin(16, 2);  
+  lcd.init();
+  lcd.backlight();
   
   EEPROM.get(address, OLD_RECORD);
 
