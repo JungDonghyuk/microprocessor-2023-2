@@ -131,8 +131,6 @@ void loop(){
       }
     show_four_digits(min * 1000 + sec * 10 + deci_sec);
     }
-  else{
-  }
   }
 void show_digit(uint8_t pos, uint8_t number){
   for(int i = 0; i < 4; i++){
