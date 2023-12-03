@@ -1,0 +1,40 @@
+//조도센서 2개의 값을 VALUE1, VALUE2에 넣음. 
+
+#define ADC_RESOLUTION_IN_BIT 10
+
+const uint16_t step = pow(2, ADC_RESOLUTION_IN_BIT) / 4;
+
+void init_Serial(){
+  Serial.begin(9600);
+  delay(1000);
+}
+
+void init_ADC(){
+  ADMUX |= (0<< REFS1) | (1<< REFS0);
+  ADMUX |= (0<< ADLAR);
+  ADMUX |= (0<<MUX3) | (0<<MUX2) | (0<<MUX1) |(0<<MUX0);
+  ADCSRA |= (1<<ADEN);
+  ADCSRA |= (1<<ADPS2) | (1<<ADPS1) | (1<<ADPS0);
+}
+
+uint16_t read_ADC(uint8_t channel) {
+  ADMUX = (ADMUX & 0xF0) | (channel & 0x0F);
+  ADCSRA |= (1 << ADSC);
+  while (ADCSRA & (1 << ADSC));
+  return ADC;
+}
+
+void setup(){
+  init_Serial();
+  init_ADC();
+}
+
+void loop(){
+  uint16_t value1 = read_ADC(0);
+  uint16_t value2 = read_ADC(1);
+
+  
+  Serial.println(value1);
+  
+  delay(10);
+}
