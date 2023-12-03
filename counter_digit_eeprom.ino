@@ -49,8 +49,10 @@ void setup(){
   }
 }
 void loop(){
-  pinMode (13, INPUT);
-  
+  pinMode (13, INPUT); // CONNECTED WITH JODO1
+  pinMode (11, INPUT); // CONNECTED WITH JODO2
+  uint16_t Jodo1;
+  uint16_t Jodo2;
   static uint16_t deci_sec = 0;
   static uint8_t sec = 0;
   static uint8_t min = 0;
@@ -62,7 +64,7 @@ void loop(){
   uint16_t NEW_RECORD = min*1000 + sec*10 + deci_sec;
   uint16_t OLD_RECORD;
   uint8_t address = 0;
-  if(buttonState == HIGH){
+  if(digitalRead(13) == 0){
     
     if(time_current - time_previous >= 100){
       deci_sec++;
@@ -83,7 +85,7 @@ void loop(){
     show_four_digits(min * 1000 + sec * 10 + deci_sec);
     }
   
-  else if(buttonState == LOW) {
+  else if(digitalRead(1) == 1 ) {
         
         writeCount++;
         if(writeCount <= 10) {
@@ -132,7 +134,7 @@ void loop(){
           }
           else{
             lcd.setCursor(6,0);  
-            lcd.print("ERROR");
+            lcd.print("GIVE ME A+");
             min =0;
             sec = 0;
             deci_sec =0;
