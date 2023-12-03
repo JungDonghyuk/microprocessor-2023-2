@@ -16,7 +16,7 @@ void setup() {
   
   EEPROM.get(address, OLD_RECORD);
 
-  if(sec >= 5) {
+  if(NEW_RECORD >= 50) {
     if(OLD_RECORD != 0) {
       if(OLD_RECORD > NEW_RECORD) {
         EEPROM.put(address, NEW_RECORD);
@@ -43,6 +43,6 @@ void setup() {
 
   }
   }
-  else if(sec <= 5){
+  
   }
 }
