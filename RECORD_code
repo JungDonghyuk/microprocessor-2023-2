@@ -24,7 +24,7 @@ void setup() {
         lcd.print("NEW SCORE");
         lcd.setCursor(6,1);  
         lcd.print(NEW_RECORD);
-        delay(3000);  
+         
         }
       else if(OLD_RECORD == NEW_RECORD) {
         EEPROM.put(address, NEW_RECORD);
