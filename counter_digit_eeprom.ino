@@ -64,6 +64,8 @@ void loop(){
       time_previous = time_current;
     }
     
+
+  
     
     show_four_digits(min * 1000 + sec * 10 + deci_sec);
     }
@@ -121,18 +123,20 @@ void loop(){
             min =0;
             sec = 0;
             deci_sec =0;
+          
+      
           }
             
           
-        }
-            
         
+          
+  }
         else {
           EEPROM.put(address, 0);
           writeCount = 0; 
         }
   }
-      return; // 게임이 종료되는 시점, 여기서 무조건 끝남
+     
   }
 
 void show_digit(uint8_t pos, uint8_t number){
