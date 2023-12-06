@@ -2,6 +2,7 @@
 #include <Servo.h>
 
 volatile uint8_t RECEIVED;// 최적화 막기 위해 uint대신 volatile사용
+volatile uint8_t PRE_RECEIVED;
 Servo servo[8]; 
 
 void setup() {
@@ -23,18 +24,19 @@ void setup() {
 
 ISR (SPI_STC_vect) {
   DDRD = 0xFF;
-  RECEIVED = (SPDR) ; 
-  PORTD = RECEIVED; 
+  RECEIVED = (SPDR);
+
+
+  //PORTD = RECEIVED; 
   for(int i=0; i < 8; i++) {
-    if ((RECEIVED >> i )& 0x1){
+    uint8_t OLD = (PRE_RECEIVED >> i )& 0x1;
+    uint8_t NEW = (RECEIVED >> i) & 0x1;
+    if (PRE_RECEIVED != RECEIVED){
       servo[i].write(180);
     } 
     else {
       servo[i].write(0);
     }
-  }
-  for (int i = 7; i >= 0; i--){
-      Serial.print((RECEIVED >> i) & 0x1); 
   }
 }
 
