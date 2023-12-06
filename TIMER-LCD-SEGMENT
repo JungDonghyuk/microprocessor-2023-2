@@ -1,4 +1,4 @@
-#define SEGMENT_DELAY 2
+#define SEGMENT_DELAY 2 //
 #define NUM_DIGITS 4
 #define NUM_SEGMENTS 8
 #include <EEPROM.h>
