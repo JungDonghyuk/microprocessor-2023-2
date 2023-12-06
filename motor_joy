@@ -1,0 +1,78 @@
+#include <Servo.h>
+
+Servo Roll;
+Servo Pitch;
+
+void setup() {
+  pinMode(8, INPUT_PULLUP);
+  pinMode(9, INPUT_PULLUP);
+  pinMode(7, INPUT_PULLUP);
+  pinMode(6, INPUT_PULLUP);
+
+
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+  uint16_t value1 = digitalRead(8); // pitch >0
+  uint16_t value2 = digitalRead(9); // roll > 0
+  uint16_t value3 = digitalRead(7); // pitch < 0
+  uint16_t value4 = digitalRead(6); // roll < 0
+  Roll.attach(5); // roll축 제어 모터를 5번에
+  Pitch.attach(4); // pitch축 제어 모터를 6번에
+
+  if (value1!=0 & value2!=0 & value3!=0 & value4!=0 ){
+    
+     delay(150);
+
+  }
+  else if((value1==0) && (value2!=0) && (value3!=0) && (value4!=0)){
+
+    int angle1 = 0;
+    angle1 += 2;  
+  if (angle1 > 10) {  
+    angle1 = 10; 
+  }
+  Roll.write(angle1);  
+  
+  
+    delay(150);
+  }
+  
+  else if((value2==0) && (value1!=0) && (value3!=0) && (value4!=0)){
+   
+   int angle2 = 0;
+    angle2 += 2;  
+  if (angle2 > 10) {  
+    angle2 = 10; 
+  }
+  Roll.write(angle2);  
+  
+  
+    delay(150);
+  }
+  else if((value3==0) && (value2!=0) && (value1!=0) && (value4!=0)){
+    
+    int angle3 = 0;
+    angle3 += 2;  
+  if (angle3 > 10) {  
+    angle3 = 10; 
+  }
+  Roll.write(angle3);  
+ 
+  
+    delay(150);
+  }
+  else if((value4==0) && (value2!=0) && (value3!=0) && (value1!=0)){
+
+    int angle4 = 0;
+    angle4 += 2;  
+  if (angle4 > 10) {  
+    angle4 = 10; 
+  }
+  Roll.write(angle4);  
+ 
+  
+    delay(150);
+}
+}
