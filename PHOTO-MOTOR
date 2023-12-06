@@ -1,4 +1,4 @@
-//조도센서 2개의 값을 VALUE1, VALUE2에 넣음. 마지막 딜레이 없애야할 수도 있음.
+//조도센서 2개의 값을 VALUE1, VALUE2에 넣음. 마지막 딜레이 없애야할 수도 있음.//
 
 #define ADC_RESOLUTION_IN_BIT 10
 #include <SPI.h>
