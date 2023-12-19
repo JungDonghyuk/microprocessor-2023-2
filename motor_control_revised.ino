@@ -3,7 +3,7 @@
 void setup() {
 Serial.begin(9600);
 while (!Serial) {
-; // 시리얼 포트가 연결될 때까지 기다립니다. 이 코드는 네이티브 USB에서 필요합니다.
+; 
 }
 }
 
@@ -22,7 +22,7 @@ if (NUM_ON > 10) {
 for(int i=15; i>=0; i--) {
 Serial.print((value >> i) & 0x1);
 }
-Serial.println(); // 줄바꿈 추가
+Serial.println(); 
 delay(1000);
 }
 }
