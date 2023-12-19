@@ -1,7 +1,7 @@
 #include <SPI.h>
 #include <Servo.h>
 
-volatile uint8_t RECEIVED;// 최적화 막기 위해 uint대신 volatile사용
+volatile uint8_t RECEIVED;
 volatile uint8_t PRE_RECEIVED;
 Servo servo[8]; 
 
