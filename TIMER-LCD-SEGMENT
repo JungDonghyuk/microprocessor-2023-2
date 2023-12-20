@@ -3,7 +3,8 @@
 #define NUM_SEGMENTS 8
 #include <EEPROM.h>
 #include <LiquidCrystal_I2C.h>
-
+//시작 전제조건: 0이 1일 때 
+//IF문 안 LOOP 돌다가 0번핀이 0되면 타이머 중지, 기록 실행
 void init_Serial(){
   Serial.begin(9600);
   delay(1000);
