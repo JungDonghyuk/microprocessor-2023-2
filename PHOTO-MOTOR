@@ -44,8 +44,9 @@ void setup(){
 void loop(){
   uint16_t valuephoto1 = read_ADC(0); //시작점의 조도센서 값이라고 가정함
   uint16_t valuephoto2 = read_ADC(1); //도착점의 조도센서 값이라고 가정함
-  uint16_t base1 = 500; //400은 실제로 해보고 수정이 필요함
+  uint16_t base1 = 570; //400은 실제로 해보고 수정이 필요함
   uint16_t base2 = 700; //400은 실제로 해보고 수정이 필요함
+  Serial.println(valuephoto1);
   
   if(digitalRead(7) == 1) {
     if(( valuephoto1 < base1) & (valuephoto2 < base2)){
@@ -76,13 +77,13 @@ void loop(){
         digitalWrite(SS_2, LOW); 
         SPI.transfer(hByte); 
         digitalWrite(SS_2, HIGH); 
-        Serial.println(hByte);
+        
       
         delay(3400);//벽 바꾸는 주기
   }
     
   }
-    else if ((valuephoto1 < base1) & ( valuephoto2 > base2)){
+    else {
     //도착점에 공이 들어와서 조도센서2가 가려짐.
     // 마무리코드
     // 추후에 추가할 사항(모터제어에 대해서)이 있으면, 물결이든, 어려우면 다 꺼버리던 하는 코드를 작성할 것. 
@@ -92,6 +93,8 @@ void loop(){
   //없애야할 수도 있음.
   }
 
-
+ 
+    
+    
+  }
   
-}
