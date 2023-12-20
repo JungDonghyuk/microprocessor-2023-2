@@ -7,11 +7,10 @@
 #define SS_2 10
 
 
-//시작 전제조건: N번 핀에서 1값 찍힐 때 ( 토글 스위치에서 1 보내줄 때)
+//시작 전제조건: 6번 핀에서 1값 찍힐 때 ( 토글 스위치에서 1 보내줄 때)
 const uint16_t step = pow(2, ADC_RESOLUTION_IN_BIT) / 4;
 
 void init_Serial(){
-  Serial.begin(9600);
   delay(1000);
   
 }
@@ -73,7 +72,6 @@ void loop(){
     if (NUM_ON > 10) {
      uint8_t lByte = (value >> 8);
       uint8_t hByte = (value & 0xff);
-      Serial.println(lByte);
 
       //slave1 켜고
       digitalWrite(SS_1, LOW); 
