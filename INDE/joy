@@ -21,40 +21,40 @@ void loop() {
   uint16_t value3 = digitalRead(13); // pitch < 0
   uint16_t value4 = digitalRead(12); // roll < 0
   Roll.attach(5); // roll축 제어 모터를 5번에
-  Pitch.attach(4); // pitch축 제어 모터를 6번에
+  Pitch.attach(3); // pitch축 제어 모터를 3번에
 
-  if (value1!=0 & value2!=0 & value3!=0 & value4!=0 ){
+  if (value1!=0 && value2!=0 && value3!=0 && value4!=0 ){
     
-     delay(150);
+     delay(15);
 
   }
   else if((value1==0) && (value2!=0) && (value3!=0) && (value4!=0)){
 
     
-   angle1 -= 5;
+   angle1 -= 1;
       if (angle1 < -30) {
         angle1 = -30;
   }
   Roll.write(angle1);  
   
   
-    delay(150);
+    delay(15);
   }
   
   else if((value2==0) && (value1!=0) && (value3!=0) && (value4!=0)){
    
-   angle2 -= 5;
+   angle2 -= 1;
       if (angle2 < -30) {
         angle2 = -30;
   }
   Pitch.write(angle2);  
   
   
-    delay(150);
+    delay(15);
   }
   else if((value3==0) && (value2!=0) && (value1!=0) && (value4!=0)){
     
-    angle1 += 5;  
+    angle1 += 1;  
       if (angle1 > 210) {  
         angle1 = 210;
       }
@@ -62,19 +62,19 @@ void loop() {
   Roll.write(angle1);  
  
   
-    delay(150);
+    delay(15);
   
   }
   else if((value4==0) && (value2!=0) && (value3!=0) && (value1!=0)){
 
-    angle2 += 5;  
+    angle2 += 1;  
       if (angle2 > 210) {  
         angle2 = 210;}
 
   Pitch.write(angle2);  
  
   
-    delay(150);
+    delay(15);
     }
 
 }
