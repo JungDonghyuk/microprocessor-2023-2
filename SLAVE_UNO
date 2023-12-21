@@ -1,0 +1,58 @@
+//딜레이를 적용했더니 오류가 발생하여 딜레이 사용
+#include <SPI.h>
+#include <Servo.h>
+
+volatile uint8_t RECEIVED;
+volatile uint8_t PRE_RECEIVED = 0;
+Servo servo[8];
+int servoPos[8] = {90, 90, 90, 90, 90, 90, 90, 90}; // 모든 서보 모터를 정지 상태로 초기화
+unsigned long FUT = 0; //(final update tinme, 마스터에서 받아올)
+
+
+void setup() {
+  Serial.begin(9600);
+
+  SPI.attachInterrupt();
+  pinMode(MISO, OUTPUT);
+  pinMode(MOSI, INPUT);
+  pinMode(SCK, INPUT);
+  pinMode(SS, INPUT);
+
+  SPCR |= (1<<SPIE)| (1<<SPE) | (0 << SPR1) | (1<<SPR0);
+  SPCR &= ~(1<<MSTR);
+  for (int i =0; i < 8; i++){
+    servo[i].attach(i+2);
+    servo[i].write(servoPos[i]); // 정지 상태로 서보 모터를 초기화
+  }
+}
+
+ISR (SPI_STC_vect) {
+  RECEIVED = (SPDR);
+  Serial.println(RECEIVED);
+
+
+  for (int i = 0; i < 8; i++) {
+    if ((PRE_RECEIVED & (1 << i)) != (RECEIVED & (1 << i))) {
+      if (RECEIVED & (1 << i)) {
+        servoPos[i] = 105; //105 일정 속도로 반시계방향으로 회전
+      } else {
+        servoPos[i] = 78; // 78일정 속도로 시계방향으로 회전
+      }                                                       
+      FUT = millis();
+    } 
+  }
+
+  PRE_RECEIVED = RECEIVED; 
+}
+
+void loop() {
+  if (millis() - FUT >= 1200) {
+    for (int i = 0; i < 8; i++) {
+      servo[i].write(servoPos[i]); 
+      if (servoPos[i] != 90) {
+        servoPos[i] = 90;
+      }
+    }
+    FUT = millis();
+  }
+}
