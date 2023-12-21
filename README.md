@@ -2,6 +2,9 @@
 마이크로프로세서응용시스템2023_2이태현장대호정동혁
 
 # Maze game Generator
+![KakaoTalk_20231221_092601026_01](https://github.com/JungDonghyuk/microprocessor-2023-2/assets/151125653/228652bf-bd63-4130-8687-473e80f30a3b)
+
+
 2023학년도 2학기 마이크로프로세서응용시스템 6조의 프로젝트입니다.
 
 # Overall Logic
